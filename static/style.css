@@ -1,0 +1,921 @@
+/* ======================================
+   Fiber Empire — Cozy Pastel Theme
+   ====================================== */
+
+/* --- Reset & Base --- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg: #FFF8F0;
+    --bg-panel: #FFFFFF;
+    --bg-card: #FFFFFF;
+    --bg-card-hover: #FFF0E8;
+    --bg-affordable: #F0FFF0;
+    --text: #4A3728;
+    --text-light: #8B7355;
+    --text-muted: #B8A088;
+    --rose: #E8A0BF;
+    --rose-light: #F5D0E0;
+    --lavender: #B4A7D6;
+    --lavender-light: #D9D2F0;
+    --sage: #B5D6A7;
+    --sage-light: #DCF0D2;
+    --cream: #FFF3E0;
+    --shadow: 0 2px 12px rgba(74, 55, 40, 0.08);
+    --shadow-hover: 0 4px 20px rgba(74, 55, 40, 0.14);
+    --radius: 14px;
+    --radius-sm: 10px;
+    --font: 'Nunito', 'Segoe UI', system-ui, sans-serif;
+}
+
+html, body {
+    height: 100%;
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    overflow: hidden;
+}
+
+/* --- App Layout --- */
+.app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    max-height: 100vh;
+    overflow: hidden;
+}
+
+@media (max-width: 900px) {
+    html, body {
+        overflow: auto;
+    }
+
+    .app {
+        height: auto;
+        max-height: none;
+        overflow: visible;
+        min-height: 100vh;
+    }
+}
+
+/* --- Header --- */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, var(--rose-light), var(--lavender-light));
+    border-bottom: 2px solid var(--rose);
+    flex-shrink: 0;
+}
+
+.title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: -0.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.title-icon {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+}
+
+.resources {
+    display: flex;
+    gap: 24px;
+}
+
+.resource {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--bg-panel);
+    padding: 8px 16px;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow);
+}
+
+.resource-icon {
+    font-size: 1.3rem;
+}
+
+.resource-icon-img {
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+}
+
+.resource-label {
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.resource-value {
+    font-weight: 800;
+    font-size: 1.2rem;
+    min-width: 60px;
+    text-align: right;
+}
+
+.resource-rate {
+    font-size: 0.8rem;
+    color: var(--sage);
+    font-weight: 600;
+}
+
+/* --- Main 3-Column Layout --- */
+.main {
+    display: grid;
+    grid-template-columns: 280px 1fr 280px;
+    gap: 12px;
+    padding: 12px;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+}
+
+/* --- Side Panels --- */
+.panel {
+    background: var(--bg-panel);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.panel-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    margin-bottom: 2px;
+}
+
+.panel-subtitle {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+}
+
+.item-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow-y: auto;
+    flex: 1;
+    padding-right: 4px;
+    padding-top: 4px;
+}
+
+.item-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.item-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.item-list::-webkit-scrollbar-thumb {
+    background: var(--rose-light);
+    border-radius: 3px;
+}
+
+/* --- Item Cards (Producers & Projects) --- */
+.item-card {
+    background: var(--cream);
+    border: 2px solid transparent;
+    border-radius: var(--radius-sm);
+    padding: 10px 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    opacity: 0.55;
+    pointer-events: none;
+}
+
+.item-card-body {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.item-icon {
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+    flex-shrink: 0;
+    border-radius: 8px;
+}
+
+.item-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.item-card.affordable {
+    opacity: 1;
+    pointer-events: auto;
+    border-color: var(--sage);
+    background: var(--bg-affordable);
+}
+
+.item-card.affordable:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--sage);
+    background: var(--sage-light);
+}
+
+.item-card.affordable:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow);
+}
+
+.item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.item-name {
+    font-weight: 700;
+    font-size: 0.95rem;
+}
+
+.item-count {
+    font-weight: 800;
+    font-size: 0.85rem;
+    background: var(--lavender-light);
+    color: var(--text);
+    padding: 2px 8px;
+    border-radius: 20px;
+    min-width: 32px;
+    text-align: center;
+}
+
+.item-description {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    margin-bottom: 6px;
+    line-height: 1.3;
+}
+
+.item-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+}
+
+.item-cost {
+    font-weight: 700;
+    color: var(--text);
+}
+
+.item-output {
+    color: var(--sage);
+    font-weight: 600;
+    font-size: 0.75rem;
+}
+
+/* --- Center Panel (Yarn Ball + Orbits) --- */
+.center-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    overflow: visible;
+}
+
+/* --- Orbit System --- */
+.orbit-area {
+    position: relative;
+    width: 460px;
+    height: 460px;
+    flex-shrink: 0;
+}
+
+.yarn-ball-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+.orbit-ring {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* Each slot animates itself around a circle.
+   The triple-rotate trick (rotate, translate, counter-rotate)
+   keeps icons perfectly upright at all times. */
+.orbit-slot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    z-index: 0;
+}
+
+/* Badged items always render on top so the count badge is never hidden */
+.orbit-slot.has-badge {
+    z-index: 2;
+}
+
+.orbit-inner .orbit-slot {
+    animation: orbit-inner-path 45s linear infinite;
+    animation-delay: calc(-45s * var(--i) / var(--total));
+}
+
+.orbit-outer .orbit-slot {
+    animation: orbit-outer-path 60s linear infinite;
+    animation-delay: calc(-60s * var(--i) / var(--total));
+}
+
+@keyframes orbit-inner-path {
+    from { transform: rotate(0deg)    translateY(-145px) rotate(0deg); }
+    to   { transform: rotate(360deg)  translateY(-145px) rotate(-360deg); }
+}
+
+@keyframes orbit-outer-path {
+    from { transform: rotate(0deg)    translateY(-205px) rotate(0deg); }
+    to   { transform: rotate(-360deg) translateY(-205px) rotate(360deg); }
+}
+
+.orbit-icon-wrapper {
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
+
+.orbit-inner .orbit-icon {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(74, 55, 40, 0.15));
+    animation: wobble 2.5s ease-in-out infinite;
+    animation-delay: calc(-2.5s * var(--i) / var(--total));
+}
+
+.orbit-outer .orbit-icon {
+    width: 38px;
+    height: 38px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(74, 55, 40, 0.15));
+    animation: wobble 3s ease-in-out infinite;
+    animation-delay: calc(-3s * var(--i) / var(--total));
+}
+
+@keyframes wobble {
+    0%, 100% { transform: rotate(0deg); }
+    25%      { transform: rotate(15deg); }
+    75%      { transform: rotate(-15deg); }
+}
+
+.orbit-count {
+    position: absolute;
+    bottom: -4px;
+    right: -6px;
+    background: var(--rose);
+    color: #fff;
+    font-size: 0.6rem;
+    font-weight: 800;
+    padding: 1px 5px;
+    border-radius: 10px;
+    line-height: 1.3;
+    white-space: nowrap;
+    box-shadow: 0 1px 3px rgba(74, 55, 40, 0.2);
+    font-family: var(--font);
+}
+
+/* --- Yarn Ball Button --- */
+.yarn-ball {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 4px solid var(--rose);
+    background: linear-gradient(145deg, var(--rose-light), var(--lavender-light));
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    box-shadow: 0 6px 24px rgba(232, 160, 191, 0.3);
+    font-family: var(--font);
+    padding: 16px;
+    animation: breathe 3s ease-in-out infinite;
+    transition: box-shadow 0.15s ease;
+}
+
+.yarn-ball:hover {
+    animation: none;
+    transform: scale(1.05);
+    box-shadow: 0 8px 32px rgba(232, 160, 191, 0.45);
+}
+
+.yarn-ball:active {
+    animation: pop 0.15s ease forwards;
+    transform: scale(0.92);
+    box-shadow: 0 3px 12px rgba(232, 160, 191, 0.2);
+}
+
+@keyframes breathe {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+}
+
+.yarn-ball-img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    pointer-events: none;
+}
+
+.yarn-ball-label {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.click-info {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    font-weight: 600;
+}
+
+/* --- Click Particles --- */
+.click-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: visible;
+}
+
+.click-particle {
+    position: absolute;
+    top: 20%;
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #5a9a48;
+    pointer-events: none;
+    animation: float-up 1s ease-out forwards;
+    white-space: nowrap;
+    text-shadow:
+        0 0 4px rgba(255, 255, 255, 0.9),
+        0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+@keyframes float-up {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-80px) scale(0.6);
+    }
+}
+
+/* --- Stats --- */
+.stats {
+    background: var(--bg-panel);
+    border-radius: var(--radius-sm);
+    padding: 14px 20px;
+    box-shadow: var(--shadow);
+    width: 100%;
+    max-width: 320px;
+}
+
+.stats h3 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stat-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.82rem;
+    padding: 3px 0;
+    color: var(--text-light);
+}
+
+.stat-row span:last-child {
+    font-weight: 700;
+    color: var(--text);
+}
+
+/* --- Upgrades Bar --- */
+.upgrades-bar {
+    padding: 10px 24px;
+    flex-shrink: 0;
+}
+
+.bar-title {
+    font-size: 0.95rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.upgrades-list {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-top: 4px;
+    padding-bottom: 6px;
+}
+
+.upgrades-list::-webkit-scrollbar {
+    height: 5px;
+}
+
+.upgrades-list::-webkit-scrollbar-thumb {
+    background: var(--lavender-light);
+    border-radius: 3px;
+}
+
+.upgrade-card {
+    min-width: 180px;
+    max-width: 200px;
+    background: var(--cream);
+    border: 2px solid transparent;
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    opacity: 0.5;
+    pointer-events: none;
+    flex-shrink: 0;
+}
+
+.upgrade-card.affordable {
+    opacity: 1;
+    pointer-events: auto;
+    border-color: var(--lavender);
+    background: var(--lavender-light);
+}
+
+.upgrade-card.affordable:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+.upgrade-card.affordable:active {
+    transform: translateY(0);
+}
+
+.upgrade-name {
+    font-weight: 700;
+    font-size: 0.88rem;
+    margin-bottom: 4px;
+}
+
+.upgrade-description {
+    font-size: 0.73rem;
+    color: var(--text-light);
+    margin-bottom: 6px;
+    line-height: 1.3;
+}
+
+.upgrade-cost {
+    font-weight: 700;
+    font-size: 0.82rem;
+    color: var(--lavender);
+}
+
+/* --- Achievements Bar --- */
+.achievements-bar {
+    padding: 8px 24px 20px;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.achievements-counter {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+.achievements-list {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.achievement {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    user-select: none;
+}
+
+.achievement:hover {
+    transform: scale(1.05);
+}
+
+.achievement.unlocked {
+    background: linear-gradient(135deg, var(--sage-light), var(--cream));
+    border: 1px solid var(--sage);
+    color: var(--text);
+}
+
+.achievement.locked {
+    background: var(--bg);
+    border: 1px solid var(--text-muted);
+    color: var(--text-muted);
+    opacity: 0.5;
+}
+
+.achievement.locked:hover {
+    opacity: 0.7;
+}
+
+.achievement.selected {
+    outline: 2px solid var(--rose);
+    outline-offset: 1px;
+    opacity: 1;
+}
+
+.achievement-icon {
+    font-size: 0.85rem;
+}
+
+.achievement-name {
+    font-size: 0.72rem;
+}
+
+/* --- Achievement Overlay & Popup --- */
+.achievement-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.achievement-overlay-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(74, 55, 40, 0.15);
+    cursor: pointer;
+}
+
+.achievement-popup {
+    position: relative;
+    z-index: 1;
+    animation: popIn 0.2s ease;
+}
+
+@keyframes popIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+.achievement-detail {
+    padding: 20px 28px;
+    background: linear-gradient(145deg, #fff, var(--cream));
+    border: 1px solid var(--lavender);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(74, 55, 40, 0.18);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    min-width: 240px;
+    max-width: 320px;
+}
+
+.achievement-detail-close {
+    position: absolute;
+    top: 6px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: var(--text-muted);
+    padding: 2px 6px;
+    line-height: 1;
+    border-radius: 50%;
+    transition: color 0.15s;
+}
+
+.achievement-detail-close:hover {
+    color: var(--text);
+}
+
+.achievement-detail-icon {
+    font-size: 2rem;
+}
+
+.achievement-detail-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    font-family: var(--font);
+}
+
+.achievement-detail-desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-align: center;
+    line-height: 1.4;
+    font-style: italic;
+}
+
+.achievement-detail-progress {
+    width: 100%;
+    margin-top: 4px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 10px;
+    background: var(--bg);
+    border-radius: 5px;
+    overflow: hidden;
+    border: 1px solid var(--lavender);
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--sage), var(--sage-light));
+    border-radius: 5px;
+    transition: width 0.4s ease;
+    min-width: 0;
+}
+
+.progress-label {
+    text-align: center;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+    font-weight: 600;
+}
+
+.achievement-detail-unlocked {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--sage);
+    margin-top: 2px;
+}
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+    .main {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+        overflow: visible;
+        flex: none;
+    }
+
+    .header {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+    }
+
+    .resources {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .center-panel {
+        order: -1;
+    }
+
+    .orbit-area {
+        width: 280px;
+        height: 280px;
+    }
+
+    .yarn-ball {
+        width: 120px;
+        height: 120px;
+    }
+
+    .yarn-ball-img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .orbit-inner .orbit-slot {
+        animation-name: orbit-inner-path-sm;
+    }
+
+    .orbit-outer .orbit-slot {
+        animation-name: orbit-outer-path-sm;
+    }
+
+    @keyframes orbit-inner-path-sm {
+        from { transform: rotate(0deg)    translateY(-85px) rotate(0deg); }
+        to   { transform: rotate(360deg)  translateY(-85px) rotate(-360deg); }
+    }
+
+    @keyframes orbit-outer-path-sm {
+        from { transform: rotate(0deg)    translateY(-125px) rotate(0deg); }
+        to   { transform: rotate(-360deg) translateY(-125px) rotate(360deg); }
+    }
+
+    .orbit-inner .orbit-icon {
+        width: 26px;
+        height: 26px;
+    }
+
+    .orbit-outer .orbit-icon {
+        width: 22px;
+        height: 22px;
+    }
+
+    .panel {
+        max-height: none;
+        overflow: visible;
+    }
+
+    .item-list {
+        overflow: visible;
+    }
+
+    .upgrades-list {
+        flex-wrap: wrap;
+    }
+}
+
+/* --- Animations --- */
+@keyframes pop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.12); }
+    100% { transform: scale(1); }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.item-card, .upgrade-card, .achievement {
+    animation: fadeInUp 0.3s ease;
+}
+
+/* --- Scrollbar global --- */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--rose-light);
+    border-radius: 3px;
+}

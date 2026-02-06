@@ -1,0 +1,14 @@
+{
+  "private": true,
+  "scripts": {
+    "dev": "elm-land server",
+    "build": "elm-land build",
+    "test": "elm-test-rs",
+    "postinstall": "elm-tooling install"
+  },
+  "devDependencies": {
+    "elm-land": "0.20.1",
+    "elm-test-rs": "^3.0.1-0",
+    "elm-tooling": "^1.15.1"
+  }
+}
