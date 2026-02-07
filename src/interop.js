@@ -20,6 +20,13 @@ export const onReady = ({ app, env }) => {
     });
   }
 
+  // Clear save: remove saved state from localStorage
+  if (app.ports && app.ports.clearSave) {
+    app.ports.clearSave.subscribe(() => {
+      localStorage.removeItem(SAVE_KEY);
+    });
+  }
+
   // Load game: send saved state to Elm via incoming port
   if (app.ports && app.ports.loadedGame) {
     try {

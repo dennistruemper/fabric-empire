@@ -41,6 +41,7 @@ type alias Model =
     , clickParticles : List { id : Int, age : Int }
     , nextParticleId : Int
     , selectedAchievement : Maybe String
+    , showResetConfirm : Bool
     }
 
 
@@ -51,6 +52,7 @@ init =
       , clickParticles = []
       , nextParticleId = 0
       , selectedAchievement = Nothing
+      , showResetConfirm = False
       }
     , Task.perform Tick Time.now
     )
@@ -69,6 +71,9 @@ type Msg
     | LoadedGame Encode.Value
     | SelectAchievement String
     | CloseAchievementDetail
+    | ResetGame
+    | CancelReset
+    | ConfirmReset
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -146,6 +151,24 @@ update msg model =
         CloseAchievementDetail ->
             ( { model | selectedAchievement = Nothing }, Cmd.none )
 
+        ResetGame ->
+            ( { model | showResetConfirm = True }, Cmd.none )
+
+        CancelReset ->
+            ( { model | showResetConfirm = False }, Cmd.none )
+
+        ConfirmReset ->
+            ( { model
+                | game = GameState.init
+                , tickCount = 0
+                , clickParticles = []
+                , nextParticleId = 0
+                , selectedAchievement = Nothing
+                , showResetConfirm = False
+              }
+            , Ports.clearSave ()
+            )
+
 
 
 -- SUBSCRIPTIONS
@@ -168,7 +191,7 @@ view model =
     { title = "Fiber Empire"
     , body =
         [ div [ class "app" ]
-            [ viewHeader model.game
+            [ viewHeader model
             , div [ class "main" ]
                 [ viewProducersPanel model.game
                 , viewCenter model
@@ -182,8 +205,12 @@ view model =
     }
 
 
-viewHeader : GameState -> Html Msg
-viewHeader game =
+viewHeader : Model -> Html Msg
+viewHeader model =
+    let
+        game =
+            model.game
+    in
     div [ class "header" ]
         [ h1 [ class "title" ]
             [ img [ src "/images/yarn-ball.png", class "title-icon", Html.Attributes.alt "Fiber Empire" ] []
@@ -203,7 +230,28 @@ viewHeader game =
                 , span [ class "resource-rate" ] [ text ("+" ++ Format.formatRate (GameState.stitchesPerSecond game)) ]
                 ]
             ]
+        , button [ class "reset-btn", onClick ResetGame ] [ text "\u{21BB}" ]
+        , viewResetConfirm model.showResetConfirm
         ]
+
+
+viewResetConfirm : Bool -> Html Msg
+viewResetConfirm show =
+    if show then
+        div [ class "reset-overlay" ]
+            [ div [ class "reset-overlay-backdrop", onClick CancelReset ] []
+            , div [ class "reset-popup" ]
+                [ p [ class "reset-title" ] [ text "Reset Game?" ]
+                , p [ class "reset-text" ] [ text "All progress will be lost. This cannot be undone!" ]
+                , div [ class "reset-actions" ]
+                    [ button [ class "reset-cancel", onClick CancelReset ] [ text "Keep Playing" ]
+                    , button [ class "reset-confirm", onClick ConfirmReset ] [ text "Reset Everything" ]
+                    ]
+                ]
+            ]
+
+    else
+        text ""
 
 
 viewCenter : Model -> Html Msg
