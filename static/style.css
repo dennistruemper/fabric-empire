@@ -415,6 +415,7 @@ html, body {
     height: 180px;
     border-radius: 50%;
     border: 4px solid var(--rose);
+    touch-action: manipulation;
     background: linear-gradient(145deg, var(--rose-light), var(--lavender-light));
     cursor: pointer;
     display: flex;
