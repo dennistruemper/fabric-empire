@@ -936,8 +936,8 @@ html, body {
     }
 
     .orbit-area {
-        width: 280px;
-        height: 280px;
+        width: 360px;
+        height: 360px;
     }
 
     .yarn-ball {
@@ -959,23 +959,23 @@ html, body {
     }
 
     @keyframes orbit-inner-path-sm {
-        from { transform: rotate(0deg)    translateY(-85px) rotate(0deg); }
-        to   { transform: rotate(360deg)  translateY(-85px) rotate(-360deg); }
+        from { transform: rotate(0deg)    translateY(-115px) rotate(0deg); }
+        to   { transform: rotate(360deg)  translateY(-115px) rotate(-360deg); }
     }
 
     @keyframes orbit-outer-path-sm {
-        from { transform: rotate(0deg)    translateY(-125px) rotate(0deg); }
-        to   { transform: rotate(-360deg) translateY(-125px) rotate(360deg); }
+        from { transform: rotate(0deg)    translateY(-160px) rotate(0deg); }
+        to   { transform: rotate(-360deg) translateY(-160px) rotate(360deg); }
     }
 
     .orbit-inner .orbit-icon {
-        width: 26px;
-        height: 26px;
+        width: 40px;
+        height: 40px;
     }
 
     .orbit-outer .orbit-icon {
-        width: 22px;
-        height: 22px;
+        width: 32px;
+        height: 32px;
     }
 
     .panel {
