@@ -941,13 +941,13 @@ html, body {
     }
 
     .yarn-ball {
-        width: 120px;
-        height: 120px;
+        width: 100px;
+        height: 100px;
     }
 
     .yarn-ball-img {
-        width: 70px;
-        height: 70px;
+        width: 60px;
+        height: 60px;
     }
 
     .orbit-inner .orbit-slot {
@@ -959,23 +959,23 @@ html, body {
     }
 
     @keyframes orbit-inner-path-sm {
-        from { transform: rotate(0deg)    translateY(-115px) rotate(0deg); }
-        to   { transform: rotate(360deg)  translateY(-115px) rotate(-360deg); }
+        from { transform: rotate(0deg)    translateY(-105px) rotate(0deg); }
+        to   { transform: rotate(360deg)  translateY(-105px) rotate(-360deg); }
     }
 
     @keyframes orbit-outer-path-sm {
-        from { transform: rotate(0deg)    translateY(-160px) rotate(0deg); }
-        to   { transform: rotate(-360deg) translateY(-160px) rotate(360deg); }
+        from { transform: rotate(0deg)    translateY(-155px) rotate(0deg); }
+        to   { transform: rotate(-360deg) translateY(-155px) rotate(360deg); }
     }
 
     .orbit-inner .orbit-icon {
-        width: 40px;
-        height: 40px;
+        width: 128px;
+        height: 128px;
     }
 
     .orbit-outer .orbit-icon {
-        width: 32px;
-        height: 32px;
+        width: 104px;
+        height: 104px;
     }
 
     .panel {
