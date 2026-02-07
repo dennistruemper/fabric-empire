@@ -3,7 +3,7 @@ module Pages.Home_ exposing (Model, Msg, page)
 import Dict
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Html.Events exposing (onClick)
+import Html.Events exposing (onClick, preventDefaultOn)
 import Html.Keyed as Keyed
 import Json.Decode as Decode
 import Json.Encode as Encode
@@ -287,7 +287,11 @@ viewCenter model =
               else
                 text ""
             , div [ class "yarn-ball-wrapper" ]
-                [ button [ class "yarn-ball", onClick Click ]
+                [ button
+                    [ class "yarn-ball"
+                    , onClick Click
+                    , preventDefaultOn "touchstart" (Decode.succeed ( Click, True ))
+                    ]
                     [ img [ src "/images/yarn-ball.png", class "yarn-ball-img", Html.Attributes.alt "Gather Fiber" ] []
                     , span [ class "yarn-ball-label" ] [ text "Gather Fiber!" ]
                     ]
