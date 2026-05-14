@@ -12,14 +12,15 @@ COPY elm.json elm-tooling.json ./
 # which is not supported on ARM64. elm-tooling handles Elm installation properly.
 RUN npm ci --ignore-scripts
 
-# Copy elm-land config, source files, and static assets
+# Copy elm-land config, source files, static assets, and SW generator
 COPY elm-land.json ./
 COPY src/ ./src/
 COPY static/ ./static/
+COPY scripts/generate-sw.mjs ./scripts/generate-sw.mjs
 
-# Install elm tooling and build the application
+# Install elm tooling and build the application (includes dist/sw.js)
 RUN npx elm-tooling install
-RUN npx elm-land build
+RUN npm run build
 
 # Production stage
 FROM nginx:alpine

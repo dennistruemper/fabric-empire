@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "dev": "elm-land server",
-    "build": "elm-land build",
+    "build": "elm-land build && node scripts/generate-sw.mjs",
     "test": "elm-test-rs",
     "postinstall": "elm-tooling install"
   },

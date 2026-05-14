@@ -8,7 +8,13 @@ export const flags = ({ env }) => {
 };
 
 // Called AFTER Elm app starts. Set up port subscriptions.
-export const onReady = ({ app, env }) => {
+export const onReady = ({ app }) => {
+  if (import.meta.env.PROD && 'serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js', { scope: '/' }).catch((err) => {
+      console.warn('Service worker registration failed:', err)
+    })
+  }
+
   // Save game: listen for outgoing save requests
   if (app.ports && app.ports.saveGame) {
     app.ports.saveGame.subscribe((data) => {
